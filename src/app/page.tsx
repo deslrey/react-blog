@@ -1,7 +1,12 @@
 import React from 'react'
+import Home from './Home/Home';
 
-export default function Page() {
-  return (
-    <div>测试界面</div>
-  )
+const page = () => {
+    return (
+        <>
+            <Home />
+        </>
+    )
 }
+
+export default page;
