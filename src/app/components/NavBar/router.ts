@@ -1,0 +1,36 @@
+const navList: NvaObj[] = [
+    {
+        key: 'home',
+        href: '/',
+        icon: 'icon-home',
+        title: '首页'
+    },
+    {   
+        key: 'category',
+        href: '/category',
+        icon: 'icon-category',
+        title: '文章'
+    },
+    {
+        key: 'archive',
+        href: '/archive',
+        icon: 'icon-archive',
+        title: '归档类'
+    },
+    {
+        key: 'about',
+        href: '/about',
+        icon: 'icon-about',
+        title: '关于'
+    }
+]
+
+interface NvaObj {
+    key: string,
+    href: string,
+    icon: string,
+    title: string
+}
+
+export default navList;
+
