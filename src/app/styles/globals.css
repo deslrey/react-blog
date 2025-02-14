@@ -6,6 +6,29 @@
     font-display: swap;
 }
 
+/* 在 globals.css 中 */
+body {
+    position: relative;
+    height: 100vh;
+    margin: 0;
+}
+
+body::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image: url('../../../public/images/bg05.jpeg');
+    background-size: cover;
+    background-position: center center;
+    background-attachment: fixed;
+    z-index: -1;
+    /* 确保背景图在内容下面 */
+}
+
+
 body,
 h1,
 h2,
