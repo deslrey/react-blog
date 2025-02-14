@@ -1,0 +1,204 @@
+@font-face {
+    font-family: "阿里妈妈东方大楷 Regular";
+    font-weight: 400;
+    src: url("./font/VjlkfcVsDrtK.woff2") format("woff2"),
+        url("./font/VjlkfcVsDrtK.woff") format("woff");
+    font-display: swap;
+}
+
+body,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+hr,
+p,
+blockquote,
+dl,
+dt,
+dd,
+ul,
+ol,
+li,
+pre,
+form,
+fieldset,
+legend,
+button,
+input,
+textarea,
+th,
+td {
+    margin: 0;
+    padding: 0;
+}
+
+body,
+button,
+input,
+select,
+textarea {
+    font: 12px/1.5tahoma, arial, \5b8b\4f53;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-size: 100%;
+}
+
+address,
+cite,
+dfn,
+em,
+var {
+    font-style: normal;
+}
+
+code,
+kbd,
+pre,
+samp {
+    font-family: couriernew, courier, monospace;
+}
+
+small {
+    font-size: 12px;
+}
+
+a {
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: none;
+}
+
+sup {
+    vertical-align: text-top;
+}
+
+sub {
+    vertical-align: text-bottom;
+}
+
+legend {
+    color: #000;
+}
+
+fieldset,
+img {
+    border: 0;
+}
+
+button,
+input,
+select,
+textarea {
+    font-size: 100%;
+}
+
+table {
+    border-collapse: collapse;
+    border-spacing: 0;
+}
+
+ul {
+    list-style: circle inherit;
+}
+
+ol {
+    list-style: decimal inherit;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    -webkit-font-smoothing: antialiased;
+    letter-spacing: 0.1em;
+}
+
+html,
+body {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    font-family: var(--ct-body-font-family);
+}
+
+body {
+    overflow-x: hidden;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    scroll-behavior: smooth;
+    align-items: center;
+}
+
+#__next {
+    width: 100vw;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+/* nav start */
+.nav_active {
+    background-color: var(--w-alpha-40);
+    backdrop-filter: blur(8px);
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+    transition: 0.4s;
+}
+
+.logo-light {
+    display: block;
+}
+
+.logo-auto {
+    display: none;
+}
+
+.nav_active .logo-auto,
+.nav_active_border .logo-auto {
+    display: block;
+}
+
+.nav_active .logo-light,
+.nav_active_border .logo-light {
+    display: none;
+}
+
+#layout_nav.nav_none {
+    opacity: 0;
+    transition: 0.4s;
+    pointer-events: none;
+}
+
+/* nav end */
+
+/* page loading */
+.all-page-loading {
+    position: absolute;
+    left: 0;
+    top: 0;
+    z-index: -10;
+    opacity: 0;
+}
+
+@media screen and (max-width: 900px) {
+    * {
+        letter-spacing: 0;
+    }
+}
+
+@media print {
+    body {
+        height: auto;
+    }
+}
