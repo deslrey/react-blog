@@ -5,7 +5,7 @@ const navList: NvaObj[] = [
         icon: 'icon-home',
         title: '首页'
     },
-    {   
+    {
         key: 'category',
         href: '/category',
         icon: 'icon-category',
@@ -15,7 +15,7 @@ const navList: NvaObj[] = [
         key: 'archive',
         href: '/archive',
         icon: 'icon-archive',
-        title: '归档类'
+        title: '归档'
     },
     {
         key: 'about',
@@ -25,7 +25,7 @@ const navList: NvaObj[] = [
     }
 ]
 
-interface NvaObj {
+export interface NvaObj {
     key: string,
     href: string,
     icon: string,
