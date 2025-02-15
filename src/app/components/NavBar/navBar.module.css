@@ -1,3 +1,55 @@
+.nav {
+    width: 100%;
+    height: 70px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 30px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 10;
+    -webkit-user-select: none;
+    /* Safari */
+    -moz-user-select: none;
+    /* Firefox */
+    -ms-user-select: none;
+    /* Internet Explorer/Edge */
+    user-select: none;
+    /* Non-prefixed version */
+}
+
+.nav_left {
+    display: flex;
+    align-items: center;
+    padding-left: 24px;
+}
+
+.title {
+    font-family: "Times New Roman", Times, serif;
+    font-size: 20px;
+    white-space: nowrap;
+    color: var(--txt-w-pure);
+}
+
+.title:hover {
+    color: var(--txt-w-pure);
+}
+
+.nav_right {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+}
+
+.nav_list {
+    display: flex;
+    align-items: center;
+    margin-right: 20px;
+    justify-content: flex-end;
+}
+
 .navStyle {
     display: flex;
     justify-content: space-around;

@@ -22,8 +22,17 @@ const Navbar = () => {
     }
 
     return (
-        <div className={styles.navStyle}>
-            {navList.map(v => nvaItem(v))}
+        <div className={styles.nav}>
+            <div className={styles.nav_left}>
+                <Link className={`${styles.title} nav_item_text`} href='/'>
+                    <div>我是Logo</div>
+                </Link>
+            </div>
+            <div className={styles.nav_right}>
+                <div className={styles.nav_list}>
+                    {navList.map(v => nvaItem(v))}
+                </div>
+            </div>
         </div>
     )
 }
