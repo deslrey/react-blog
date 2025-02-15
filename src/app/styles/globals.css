@@ -6,6 +6,10 @@
     font-display: swap;
 }
 
+::-webkit-scrollbar {
+    width: 0 !important
+}
+
 /* 在 globals.css 中 */
 /* body {
     position: relative;
