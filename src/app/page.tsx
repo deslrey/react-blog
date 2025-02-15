@@ -1,11 +1,11 @@
+'use client'
 import React from 'react'
-import Home from './Home/Home';
+import Home from './home/Home';
+import style from './page.module.css'
 
 const page = () => {
     return (
-        <>
-            <Home />
-        </>
+        <Home />
     )
 }
 

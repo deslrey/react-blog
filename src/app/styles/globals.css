@@ -7,13 +7,13 @@
 }
 
 /* 在 globals.css 中 */
-body {
+/* body {
     position: relative;
     height: 100vh;
     margin: 0;
-}
+} */
 
-body::before {
+/* body::before {
     content: '';
     position: absolute;
     top: 0;
@@ -25,8 +25,7 @@ body::before {
     background-position: center center;
     background-attachment: fixed;
     z-index: -1;
-    /* 确保背景图在内容下面 */
-}
+} */
 
 
 body,

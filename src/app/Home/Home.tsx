@@ -1,21 +1,26 @@
 'use client'
 
-import { useRouter } from 'next/navigation'
 import React from 'react'
+import BgImage from '../../../public/images/bg05.jpeg'
+import styles from './home.module.css'
+import Image from 'next/image'
 
 const Home = () => {
-    const router = useRouter()
-
-    const handleClick = () => {
-        router.push('/about')
-    }
 
     return (
-        <div>
-            <h1>我是首页</h1>
-            <button onClick={handleClick}>点我跳转到关于界面</button>
+        <div className={styles.home}>
+            <div className={styles.bg_card}>
+                <Image
+                    className={styles.bg_card_img}
+                    width={2000}
+                    height={1000}
+                    src={BgImage}
+                    alt='blog-bg'
+                    priority={true} />
+            </div>
         </div>
     )
 }
 
-export default Home
+
+export default Home;
