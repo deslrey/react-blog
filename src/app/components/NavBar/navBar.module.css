@@ -10,7 +10,7 @@
     left: 0;
     right: 0;
     background: rgba(255, 255, 255, 0.3);
-    color: aliceblue;
+    color: black;
     /* 半透明背景 */
     z-index: 10;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
@@ -22,4 +22,41 @@
 .blurred {
     backdrop-filter: blur(10px);
     /* 添加模糊背景 */
+}
+
+.nav_item {
+    margin: 0 5px;
+    padding: 5px 10px;
+    display: flex;
+    align-items: center;
+    color: var(--txt-w-pure);
+}
+
+/* 当前选中导航的样式 */
+.nav_item_active {
+    background-color: var(--b-alpha-5);
+    border-radius: 5px;
+}
+
+.nav_item:hover {
+    background-color: var(--b-alpha-5);
+    border-radius: 5px;
+    color: var(--txt-w-pure);
+}
+
+.nav_item_icon {
+    margin-right: 4px;
+    font-size: 18px;
+}
+
+.nav_item_title {
+    font-size: 16px;
+    white-space: nowrap;
+}
+
+.nav_item {
+    width: 100%;
+    padding: 15px 30px;
+    margin: 0;
+    color: var(--b-alpha) !important;
 }
