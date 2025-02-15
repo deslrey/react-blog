@@ -7,10 +7,19 @@ import styles from './home.module.css'
 import Typed from "typed.js"
 import Image from 'next/image'
 import SysIcon from '../components/SysIcon'
+import { scrollTo } from '../utils/elements'
 
 const Home = () => {
 
     const typeTarget = useRef<any>(null);
+    const aboutDom = useRef<any>(null);
+
+    const goAbout = () => {
+        const aboutTop = aboutDom.current.offsetTop;
+        scrollTo(aboutTop, {
+            getContainer: () => document.body || window,
+        });
+    };
 
     useEffect(() => {
         const typed = new Typed(typeTarget.current, {
@@ -53,9 +62,12 @@ const Home = () => {
                     <SysIcon
                         className={styles.jiantou_icon}
                         type="icon-arrow-down"
-                    // onClick={goAbout}
+                        onClick={goAbout}
                     />
                 </div>
+            </div>
+            <div className={styles.page_box} ref={aboutDom}>
+                <div>测试数据</div>
             </div>
         </div>
     )

@@ -96,6 +96,15 @@
 }
 
 
+.page_box {
+    width: 100%;
+    background-color: var(--w-alpha-80);
+    display: flex;
+    flex-direction: column;
+    padding: 70px 0;
+    backdrop-filter: blur(10px);
+}
+
 @media screen and (max-width: 700px) {
     .bg_content .title {
         width: 100%;
