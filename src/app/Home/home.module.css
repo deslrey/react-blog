@@ -17,3 +17,112 @@
     height: 100%;
     object-fit: cover;
 }
+
+.bg_mask {
+    width: 100%;
+    height: 100vh;
+    position: fixed;
+    left: 0;
+    top: 0;
+    z-index: -99;
+}
+
+.bg_content {
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 70px 0;
+    position: relative;
+    color: #FFFFFF;
+}
+
+.bg_content .title {
+    width: 80%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 80px;
+    font-size: 60px;
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
+    /* 添加黑色阴影 */
+    font-family: "阿里妈妈东方大楷 Regular", serif;
+    color: var(--txt-w-pure);
+    margin-bottom: 40px;
+}
+
+.bg_content .description_box {
+    width: 80%;
+    height: 72px;
+    display: flex;
+    justify-content: center;
+}
+
+.description_box .description {
+    line-height: 1.3;
+    color: var(--txt-w-pure);
+    font-size: 26px;
+    font-weight: bold;
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
+    /* 添加黑色阴影 */
+    font-family: "楷体", "华文楷体";
+    text-align: center;
+}
+
+.bg_content .jiantou {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 70px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1;
+}
+
+.bg_content .jiantou_icon {
+    font-size: 36px;
+    color: var(--txt-w-pure);
+    font-weight: bold;
+    opacity: 0.7;
+    transition: 0.45s;
+    cursor: pointer;
+}
+
+.bg_content .jiantou_icon:hover {
+    opacity: 1;
+}
+
+
+@media screen and (max-width: 700px) {
+    .bg_content .title {
+        width: 100%;
+        font-size: 28px;
+    }
+
+    .description_box .description {
+        font-size: 20px;
+    }
+
+    .timeAixs {
+        width: 90%;
+    }
+
+    .page_list {
+        grid-template-columns: repeat(1, 1fr);
+    }
+}
+
+@keyframes gradient {
+    from {
+        transform: scale(1.05);
+        opacity: 0.5;
+    }
+
+    to {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
