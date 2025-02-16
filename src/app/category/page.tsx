@@ -4,7 +4,7 @@ import styles from './category.module.css'
 
 const Category = () => {
     return (
-        <div>Category</div>
+        <div className={styles.category}>Category</div>
     )
 }
 

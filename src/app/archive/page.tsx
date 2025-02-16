@@ -4,7 +4,7 @@ import styles from './archive.module.css'
 
 const Archive = () => {
     return (
-        <div>Archive</div>
+        <div className={styles.archive}>Archive</div>
     )
 }
 
