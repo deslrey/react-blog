@@ -112,3 +112,15 @@
     margin: 0;
     color: var(--b-alpha) !important;
 }
+
+.under_line {
+    width: 100%;
+    height: 0.1px;
+    /* 下划线的高度 */
+    background-color: rgba(0, 0, 0, 0.3); /* 使用半透明的黑色，确保在浅色背景下清晰 */
+    /* 下划线的颜色 */
+    position: absolute;
+    bottom: 0;
+    /* 将下划线定位在导航栏的下方 */
+    left: 0;
+}
