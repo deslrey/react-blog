@@ -1,7 +1,7 @@
 import React from 'react'
 import Link from 'next/link';
 import Image, { StaticImageData } from 'next/image'
-import ArticleImage from '../../../public/images/ikun.jpg'
+import ArticleImage from '../../../public/images/0.webp'
 
 import styles from './article.module.css'
 
