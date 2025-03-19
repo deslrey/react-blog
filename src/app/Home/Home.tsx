@@ -54,7 +54,7 @@ const Home = () => {
             </div>
             <div className={styles.bg_mask} id="bg_mask" />
             <div className={styles.bg_content}>
-                <div className={styles.title}>世人万千，再难遇我</div>
+                <div className={styles.title}>....</div>
                 <div className={styles.description_box}>
                     <div className={styles.description} ref={typeTarget} />
                 </div>
@@ -67,7 +67,7 @@ const Home = () => {
                 </div>
             </div>
             <div className={styles.page_box} ref={aboutDom}>
-                <div>测试数据</div>
+                <div style={{ height: '800px' }}>测试数据</div>
             </div>
         </div>
     )
