@@ -9,14 +9,14 @@
     top: 0;
     left: 0;
     z-index: 10;
-    -webkit-user-select: none;
-    /* Safari */
-    -moz-user-select: none;
-    /* Firefox */
-    -ms-user-select: none;
-    /* Internet Explorer/Edge */
-    user-select: none;
-    /* Non-prefixed version */
+    background-color: white;
+    transition: background-color 0.3s ease;
+}
+
+/* 为首页添加透明样式 */
+.nav_transparent {
+    background-color: transparent;
+    box-shadow: none;
 }
 
 .nav_left {
@@ -76,14 +76,6 @@
     /* 添加模糊背景 */
 }
 
-.nav_item {
-    margin: 0 5px;
-    padding: 5px 10px;
-    display: flex;
-    align-items: center;
-    color: var(--txt-w-pure);
-}
-
 /* 当前选中导航的样式 */
 .nav_item_active {
     background-color: var(--b-alpha-5);
@@ -106,21 +98,106 @@
     white-space: nowrap;
 }
 
-.nav_item {
-    width: 100%;
-    padding: 15px 30px;
-    margin: 0;
-    color: var(--b-alpha) !important;
-}
-
 .under_line {
     width: 100%;
     height: 0.1px;
     /* 下划线的高度 */
-    background-color: rgba(0, 0, 0, 0.3); /* 使用半透明的黑色，确保在浅色背景下清晰 */
+    background-color: rgba(0, 0, 0, 0.3);
+    /* 使用半透明的黑色，确保在浅色背景下清晰 */
     /* 下划线的颜色 */
     position: absolute;
     bottom: 0;
     /* 将下划线定位在导航栏的下方 */
     left: 0;
+}
+
+.menu_icon {
+    display: none;
+    font-size: 26px;
+    cursor: pointer;
+}
+
+@media screen and (max-width: 1000px) {
+    .nav_list {
+        display: none;
+    }
+
+    .menu_icon {
+        display: block;
+    }
+}
+
+/* 移动端下拉菜单：从顶部滑出，宽度撑满 */
+.mobile_menu {
+    position: absolute;
+    top: 0;
+    /* 菜单从顶部开始 */
+    left: 0;
+    width: 100vw;
+    /* 宽度撑满整个视口 */
+    background-color: #fff;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+    z-index: 20;
+    padding: 10px 0;
+    transition: transform 0.3s ease, opacity 0.3s ease;
+    transform: translateY(-100%);
+    /* 默认隐藏在顶部 */
+    opacity: 0;
+}
+
+/* 菜单展开时的状态 */
+.menu_open {
+    transform: translateY(0);
+    /* 展开菜单 */
+    opacity: 1;
+}
+
+/* 菜单收起时的状态 */
+.menu_close {
+    transform: translateY(-100%);
+    /* 菜单滑出顶部 */
+    opacity: 0;
+}
+
+/* 移动端菜单里的每一项 */
+.mobile_menu .nav_item {
+    padding: 12px 20px;
+    color: #333;
+    display: flex;
+    align-items: center;
+    /* 垂直居中 */
+    justify-content: center;
+    /* 水平居中 */
+    transition: background-color 0.3s;
+    border-bottom: 1px solid #f1f1f1;
+    height: 50px;
+}
+
+.mobile_menu .nav_item:last-child {
+    border-bottom: none;
+}
+
+.mobile_menu .nav_item:hover {
+    background-color: #f5f5f5;
+    border-radius: 0;
+}
+
+.nav_item {
+    width: 100%;
+    padding: 15px 30px;
+    margin: 0;
+    color: var(--b-alpha) !important;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 70px;
+}
+
+.mobile_menu .nav_item:last-child {
+    border-bottom: none;
+}
+
+.mobile_menu .nav_item:hover {
+    background-color: #f5f5f5;
+    border-radius: 0;
 }
