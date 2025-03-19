@@ -6,8 +6,8 @@ const navList: NvaObj[] = [
         title: '首页'
     },
     {
-        key: 'category',
-        href: '/category',
+        key: 'article',
+        href: '/article',
         icon: 'icon-category',
         title: '文章'
     },
