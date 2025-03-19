@@ -1,10 +1,10 @@
 import React from 'react'
 
-import './article.module.css'
+import styles from './article.module.css'
 
 function Article() {
     return (
-        <div>Article</div>
+        <div className={styles.article}>Article</div>
     )
 }
 
