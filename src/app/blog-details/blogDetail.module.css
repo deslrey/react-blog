@@ -7,12 +7,73 @@
     align-items: center;
     background-color: var(--bg-w-pure);
     position: relative;
-    -webkit-user-select: none;
-    /* Safari */
-    -moz-user-select: none;
-    /* Firefox */
-    -ms-user-select: none;
-    /* Internet Explorer/Edge */
-    user-select: none;
-    /* Non-prefixed version */
+
+    /* 允许用户选择文字 */
+    -webkit-user-select: text;
+    -moz-user-select: text;
+    -ms-user-select: text;
+    user-select: text;
+}
+
+.frontMatter {
+    background-color: #f9f9f9;
+    padding: 24px 28px;
+    border-radius: 12px;
+    margin-bottom: 32px;
+    border-left: 6px solid #3498db;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    width: 80%;
+}
+
+.frontMatter h1 {
+    margin-bottom: 20px;
+    font-size: 32px;
+    color: #333;
+    font-weight: bold;
+}
+
+.frontMatter p {
+    margin: 10px 0;
+    color: #555;
+    font-size: 16px;
+    line-height: 1.8;
+}
+
+.markdownContent {
+    width: 80%;
+    line-height: 1.8;
+    color: #333;
+    font-size: 17px;
+    word-break: break-word;
+}
+
+.markdownContent h1,
+.markdownContent h2,
+.markdownContent h3 {
+    margin-top: 32px;
+    margin-bottom: 16px;
+    color: #2c3e50;
+}
+
+.markdownContent p {
+    margin-bottom: 20px;
+}
+
+.markdownContent code {
+    background-color: #f4f4f4;
+    padding: 4px 8px;
+    border-radius: 6px;
+    color: #c7254e;
+    font-family: monospace;
+}
+
+.markdownContent pre {
+    background-color: #272822;
+    color: #f8f8f2;
+    padding: 20px;
+    border-radius: 12px;
+    overflow-x: auto;
+    margin-bottom: 32px;
+    font-size: 15px;
+    line-height: 1.6;
 }
