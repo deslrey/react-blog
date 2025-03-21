@@ -24,7 +24,8 @@
     "react-markdown": "^9.0.3",
     "remark-gfm": "^4.0.1",
     "remark-math": "^6.0.0",
-    "typed.js": "^2.1.0"
+    "typed.js": "^2.1.0",
+    "yaml": "^2.7.0"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",
