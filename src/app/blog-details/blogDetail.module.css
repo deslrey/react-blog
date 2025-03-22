@@ -68,7 +68,8 @@
 }
 
 .markdownContent pre {
-    background-color: #272822;
+    background-color: #2d2f3a;
+    /* 深灰蓝，柔和不刺眼 */
     color: #f8f8f2;
     padding: 20px;
     border-radius: 12px;
@@ -77,32 +78,36 @@
     font-size: 15px;
     line-height: 1.6;
     position: relative;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
 }
 
-/* 语言标签 */
-.code-header {
-    background-color: #1e1e1e;
-    color: #ccc;
-    padding: 6px 12px;
+/* 代码块顶部标签优化 */
+.codeHeader {
+    background: linear-gradient(90deg, #3a3f51 0%, #4a5165 100%);
+    /* 蓝灰渐变 */
+    color: #e0e0e0;
+    padding: 10px 16px;
     border-top-left-radius: 12px;
     border-top-right-radius: 12px;
-    font-size: 14px;
     display: flex;
     justify-content: space-between;
     align-items: center;
+    font-size: 14px;
 }
 
-/* 复制按钮 */
-.copy-btn {
-    background-color: #3a3a3a;
+/* 复制按钮优化，带渐变和阴影 */
+.copyBtn {
+    background: linear-gradient(90deg, #4a90e2 0%, #357abd 100%);
     color: #fff;
     border: none;
-    border-radius: 6px;
-    padding: 4px 8px;
+    border-radius: 8px;
+    padding: 6px 14px;
     cursor: pointer;
-    font-size: 13px;
+    transition: background-color 0.3s, transform 0.2s;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
 }
 
-.copy-btn:hover {
-    background-color: #555;
+.copyBtn:hover {
+    background: linear-gradient(90deg, #357abd 0%, #2c6da4 100%);
+    transform: scale(1.05);
 }

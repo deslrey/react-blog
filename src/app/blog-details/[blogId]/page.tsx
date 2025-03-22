@@ -28,17 +28,30 @@ const CodeBlock = ({ language, value }: { language: string; value: string }) => 
     };
 
     return (
-        <div style={{ marginBottom: '32px', borderRadius: '12px', overflow: 'hidden' }}>
+        <div style={{ marginBottom: '32px', borderRadius: '12px', boxShadow: '0 4px 12px rgba(0,0,0,0.1)' }}>
             <div className={styles.codeHeader}>
-                <span>{language}</span>
+                <span style={{ fontWeight: 'bold', textTransform: 'uppercase' }}>{language}</span>
                 <button className={styles.copyBtn} onClick={handleCopy}>{copyText}</button>
             </div>
-            <SyntaxHighlighter language={language} style={oneDark} PreTag="div">
+            <SyntaxHighlighter
+                language={language}
+                style={oneDark}
+                PreTag="div"
+                showLineNumbers
+                customStyle={{
+                    borderBottomLeftRadius: '12px',
+                    borderBottomRightRadius: '12px',
+                    padding: '20px',
+                    fontSize: '15px',
+                    lineHeight: '1.6'
+                }}
+            >
                 {value}
             </SyntaxHighlighter>
         </div>
     );
 };
+
 
 const BlogDetails = ({ params }: { params: Promise<{ blogId: number }> }) => {
     const { blogId } = React.use(params);
