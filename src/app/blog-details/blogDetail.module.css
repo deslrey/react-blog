@@ -76,4 +76,33 @@
     margin-bottom: 32px;
     font-size: 15px;
     line-height: 1.6;
+    position: relative;
+}
+
+/* 语言标签 */
+.code-header {
+    background-color: #1e1e1e;
+    color: #ccc;
+    padding: 6px 12px;
+    border-top-left-radius: 12px;
+    border-top-right-radius: 12px;
+    font-size: 14px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+/* 复制按钮 */
+.copy-btn {
+    background-color: #3a3a3a;
+    color: #fff;
+    border: none;
+    border-radius: 6px;
+    padding: 4px 8px;
+    cursor: pointer;
+    font-size: 13px;
+}
+
+.copy-btn:hover {
+    background-color: #555;
 }

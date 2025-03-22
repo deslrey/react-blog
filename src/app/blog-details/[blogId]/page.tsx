@@ -1,7 +1,10 @@
-'use client'
+'use client';
 
 import React, { useEffect, useState } from 'react';
 import ReactMarkdown from 'react-markdown';
+import rehypeRaw from 'rehype-raw';
+import { PrismLight as SyntaxHighlighter } from 'react-syntax-highlighter';
+import { oneDark } from 'react-syntax-highlighter/dist/esm/styles/prism';
 import YAML from 'yaml';
 import styles from '../blogDetail.module.css';
 
@@ -15,9 +18,30 @@ interface FrontMatter {
     fileName: number;
 }
 
+const CodeBlock = ({ language, value }: { language: string; value: string }) => {
+    const [copyText, setCopyText] = useState('复制');
+
+    const handleCopy = () => {
+        navigator.clipboard.writeText(value);
+        setCopyText('已复制');
+        setTimeout(() => setCopyText('复制'), 2000);
+    };
+
+    return (
+        <div style={{ marginBottom: '32px', borderRadius: '12px', overflow: 'hidden' }}>
+            <div className={styles.codeHeader}>
+                <span>{language}</span>
+                <button className={styles.copyBtn} onClick={handleCopy}>{copyText}</button>
+            </div>
+            <SyntaxHighlighter language={language} style={oneDark} PreTag="div">
+                {value}
+            </SyntaxHighlighter>
+        </div>
+    );
+};
+
 const BlogDetails = ({ params }: { params: Promise<{ blogId: number }> }) => {
     const { blogId } = React.use(params);
-
     const [frontMatter, setFrontMatter] = useState<FrontMatter | null>(null);
     const [markdownContent, setMarkdownContent] = useState<string>('');
 
@@ -25,24 +49,14 @@ const BlogDetails = ({ params }: { params: Promise<{ blogId: number }> }) => {
         const loadMarkdown = async () => {
             try {
                 const res = await fetch(`/content/${blogId}.md`);
-                if (!res.ok) {
-                    console.error('Markdown 加载失败');
-                    return;
-                }
+                if (!res.ok) return console.error('Markdown 加载失败');
                 const text = await res.text();
-
-                // 正则提取 Front Matter
                 const match = text.match(/^---\n([\s\S]+?)\n---\n([\s\S]*)$/);
                 if (match) {
-                    const yamlContent = match[1];
-                    const markdownBody = match[2];
-
-                    // 解析 YAML
-                    const metadata: FrontMatter = YAML.parse(yamlContent);
-                    setFrontMatter(metadata);
-                    setMarkdownContent(markdownBody);
+                    setFrontMatter(YAML.parse(match[1]));
+                    setMarkdownContent(match[2]);
                 } else {
-                    setMarkdownContent(text); // 没有 Front Matter 直接渲染全文
+                    setMarkdownContent(text);
                 }
             } catch (error) {
                 console.error('加载失败', error);
@@ -54,7 +68,6 @@ const BlogDetails = ({ params }: { params: Promise<{ blogId: number }> }) => {
 
     return (
         <div className={styles.bolgDetail}>
-            {/* 渲染 Front Matter */}
             {frontMatter && (
                 <div className={styles.frontMatter}>
                     <h1>{frontMatter.title}</h1>
@@ -66,9 +79,36 @@ const BlogDetails = ({ params }: { params: Promise<{ blogId: number }> }) => {
                 </div>
             )}
 
-            {/* 渲染 Markdown 正文 */}
             <div className={styles.markdownContent}>
-                <ReactMarkdown>{markdownContent}</ReactMarkdown>
+                <ReactMarkdown
+                    rehypePlugins={[rehypeRaw]}
+                    components={{
+                        code({
+                            node,
+                            inline,
+                            className,
+                            children,
+                            ...props
+                        }: {
+                            node?: any;
+                            inline?: boolean;
+                            className?: string;
+                            children?: React.ReactNode;
+                        }) {
+                            const match = /language-(\w+)/.exec(className || '');
+                            const language = match ? match[1] : 'plaintext';
+                            const codeString = String(children).replace(/\n$/, '');
+
+                            return inline ? (
+                                <code className={className} {...props}>{children}</code>
+                            ) : (
+                                <CodeBlock language={language} value={codeString} />
+                            );
+                        },
+                    }}
+                >
+                    {markdownContent}
+                </ReactMarkdown>
             </div>
         </div>
     );
