@@ -22,10 +22,35 @@ const CodeBlock = ({ language, value }: { language: string; value: string }) => 
     const [copyText, setCopyText] = useState('复制');
 
     const handleCopy = () => {
-        navigator.clipboard.writeText(value);
-        setCopyText('已复制');
-        setTimeout(() => setCopyText('复制'), 2000);
+        const copySuccess = () => {
+            setCopyText('已复制');
+            setTimeout(() => setCopyText('复制'), 2000);
+        };
+
+        if (navigator.clipboard?.writeText) {
+            navigator.clipboard.writeText(value).then(copySuccess).catch(() => fallbackCopy());
+        } else {
+            fallbackCopy();
+        }
+
+        function fallbackCopy() {
+            try {
+                const textArea = document.createElement('textarea');
+                textArea.value = value;
+                textArea.style.position = 'fixed';
+                textArea.style.opacity = '0';
+                document.body.appendChild(textArea);
+                textArea.focus();
+                textArea.select();
+                document.execCommand('copy');
+                document.body.removeChild(textArea);
+                copySuccess();
+            } catch (err) {
+                alert('复制失败，请长按手动复制');
+            }
+        }
     };
+
 
     return (
         <div style={{ marginBottom: '32px', borderRadius: '12px', boxShadow: '0 4px 12px rgba(0,0,0,0.1)' }}>
