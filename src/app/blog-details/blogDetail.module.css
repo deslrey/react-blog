@@ -1,5 +1,5 @@
 .bolgDetail {
-    width: 100%;
+    width: 60%;
     padding: 90px 0 22px 0;
     flex: 1;
     display: flex;
@@ -71,7 +71,7 @@
     background-color: #2d2f3a;
     /* 深灰蓝，柔和不刺眼 */
     color: #f8f8f2;
-    padding: 20px;
+    padding: 10px;
     border-radius: 12px;
     overflow-x: auto;
     margin-bottom: 32px;
@@ -80,6 +80,19 @@
     position: relative;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
 }
+
+.markdownContent img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+    margin: 20px auto;
+    /* 可选：让图片居中 */
+    border-radius: 8px;
+    /* 可选：图片圆角，整体更柔和 */
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    /* 可选：加点阴影更美观 */
+}
+
 
 /* 代码块顶部标签优化 */
 .codeHeader {
