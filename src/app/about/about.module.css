@@ -1,18 +1,61 @@
 .about {
     width: 100%;
-    padding: 90px 0 22px 0;
-    flex: 1;
+    padding: 180px 0 40px 0;
+    /* 增加顶部和底部的间距 */
     display: flex;
     flex-direction: column;
     align-items: center;
     background-color: var(--bg-w-pure);
     position: relative;
     -webkit-user-select: none;
-    /* Safari */
     -moz-user-select: none;
-    /* Firefox */
     -ms-user-select: none;
-    /* Internet Explorer/Edge */
     user-select: none;
-    /* Non-prefixed version */
+}
+
+.avatar {
+    width: 160px;
+    /* 设置头像宽度 */
+    height: 160px;
+    /* 设置头像高度 */
+    border-radius: 50%;
+    /* 圆形头像 */
+    margin-bottom: 20px;
+    /* 头像和内容之间的间距 */
+    background-image: url('../../../public/images/avatar.png');
+    /* 头像图片路径 */
+    background-size: cover;
+    background-position: center;
+    margin-top: 20px;
+    /* 给头像顶部增加一些间距 */
+
+    /* 添加阴影和边框 */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    /* 白色边框，突显头像 */
+}
+
+.about-content {
+    text-align: center;
+    font-size: 18px;
+    color: #555;
+    max-width: 800px;
+}
+
+/* 响应式优化：当屏幕宽度较小时调整头像大小 */
+@media screen and (max-width: 768px) {
+    .avatar {
+        width: 100px;
+        /* 小屏幕上稍微缩小头像 */
+        height: 100px;
+        /* 小屏幕上稍微缩小头像 */
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .avatar {
+        width: 80px;
+        /* 更小屏幕时再缩小 */
+        height: 80px;
+        /* 更小屏幕时再缩小 */
+    }
 }
