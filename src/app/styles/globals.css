@@ -151,6 +151,10 @@ ol {
     box-sizing: border-box;
     -webkit-font-smoothing: antialiased;
     letter-spacing: 0.1em;
+    -webkit-user-select: text;
+    -moz-user-select: text;
+    -ms-user-select: text;
+    user-select: text;
 }
 
 html,
