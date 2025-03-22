@@ -102,15 +102,18 @@ const BlogDetails = ({ params }: { params: Promise<{ blogId: number }> }) => {
                 const res = await fetch(`/content/${blogId}.md`);
                 if (!res.ok) return console.error('Markdown 加载失败');
                 const text = await res.text();
-                const match = text.match(/^---\n([\s\S]+?)\n---\n([\s\S]*)$/);
+
+                const match = text.match(/^---\r?\n([\s\S]+?)\r?\n---\r?\n([\s\S]*)$/);
                 if (match) {
                     setFrontMatter(YAML.parse(match[1]));
                     setMarkdownContent(match[2]);
                     setHeadings(extractHeadings(match[2]));
                 } else {
+                    console.log('YAML 匹配失败，原文:', text.slice(0, 300));
                     setMarkdownContent(text);
                     setHeadings(extractHeadings(text));
                 }
+
             } catch (error) {
                 console.error('加载失败', error);
             }
