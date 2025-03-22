@@ -28,13 +28,34 @@
 }
 
 .frontMatter {
-    background-color: #f9f9f9;
-    padding: 12px 28px;
-    border-radius: 12px;
-    margin-bottom: 32px;
+    background-color: #ffffff;
+    padding: 24px 32px;
+    border-radius: 16px;
+    margin-bottom: 40px;
     border-left: 6px solid #3498db;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-    width: 80%;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+    width: 85%;
+}
+
+.frontMatter h1 {
+    font-size: 28px;
+    background: linear-gradient(90deg, #3498db, #8e44ad);
+    -webkit-background-clip: text;
+    color: transparent;
+    margin-bottom: 20px;
+    font-weight: bold;
+}
+
+.frontMatter p {
+    font-size: 16px;
+    color: #555;
+    margin-bottom: 12px;
+    border-bottom: 1px dashed #ddd;
+    padding-bottom: 8px;
+}
+
+.frontMatter p:last-child {
+    border-bottom: none;
 }
 
 .markdownContent {
