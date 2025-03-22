@@ -52,7 +52,7 @@ const CodeBlock = ({ language, value }: { language: string; value: string }) => 
     };
 
     return (
-        <div style={{ marginBottom: '32px', borderRadius: '12px', boxShadow: '0 4px 12px rgba(0,0,0,0.1)' }}>
+        <div style={{ marginBottom: '10px', borderRadius: '12px', boxShadow: '0 4px 12px rgba(0,0,0,0.1)' }}>
             <div className={styles.codeHeader}>
                 <span style={{ fontWeight: 'bold', textTransform: 'uppercase' }}>{language}</span>
                 <button className={styles.copyBtn} onClick={handleCopy}>{copyText}</button>
@@ -65,7 +65,6 @@ const CodeBlock = ({ language, value }: { language: string; value: string }) => 
                 customStyle={{
                     borderBottomLeftRadius: '12px',
                     borderBottomRightRadius: '12px',
-                    padding: '20px',
                     fontSize: '15px',
                     lineHeight: '1.6'
                 }}

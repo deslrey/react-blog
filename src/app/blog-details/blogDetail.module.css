@@ -1,14 +1,18 @@
 .bolgDetailContainer {
     display: flex;
-    justify-content: flex-start;
-    width: 80%;
-    transform: translateX(5%);
+    width: 100%;
+    /* 设置为100%，确保宽度尽可能占满可用空间 */
     margin: 0 auto;
     flex-wrap: wrap;
+    max-width: 1200px;
+    transform: translateX(5%);
+
+    /* 最大宽度，避免过宽 */
 }
 
 .bolgDetail {
     width: 70%;
+    /* 在大屏下宽度为70% */
     padding: 90px 0 2px 0;
     flex: 1;
     display: flex;
@@ -33,20 +37,6 @@
     width: 80%;
 }
 
-.frontMatter h1 {
-    margin-bottom: 20px;
-    font-size: 32px;
-    color: #333;
-    font-weight: bold;
-}
-
-.frontMatter p {
-    margin: 10px 0;
-    color: #555;
-    font-size: 16px;
-    line-height: 1.8;
-}
-
 .markdownContent {
     width: 80%;
     line-height: 1.8;
@@ -69,7 +59,6 @@
 
 .markdownContent code {
     background-color: #f4f4f4;
-    padding: 4px 8px;
     border-radius: 6px;
     color: #c7254e;
     font-family: monospace;
@@ -78,7 +67,6 @@
 .markdownContent pre {
     background-color: #2d2f3a;
     color: #f8f8f2;
-    padding: 10px;
     border-radius: 12px;
     overflow-x: auto;
     margin-bottom: 32px;
@@ -92,12 +80,11 @@
     max-width: 100%;
     height: auto;
     display: block;
-    margin: 20px auto;
+    margin: 10px auto;
     border-radius: 8px;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
 
-/* 代码块顶部标签优化 */
 .codeHeader {
     background: linear-gradient(90deg, #3a3f51 0%, #4a5165 100%);
     color: #e0e0e0;
@@ -110,7 +97,6 @@
     font-size: 14px;
 }
 
-/* 复制按钮优化，带渐变和阴影 */
 .copyBtn {
     background: linear-gradient(90deg, #4a90e2 0%, #357abd 100%);
     color: #fff;
@@ -127,9 +113,8 @@
     transform: scale(1.05);
 }
 
-/* 目录部分 */
 .directory {
-    width: 20%;
+    width: 25%;
     padding: 20px;
     position: sticky;
     top: 100px;
@@ -139,21 +124,26 @@
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
 }
 
-/* 媒体查询，屏幕宽度小于1200px时隐藏目录 */
 @media (max-width: 1200px) {
     .directory {
         display: none;
-        /* 隐藏目录 */
     }
 
     .bolgDetailContainer {
         flex-direction: column;
         align-items: center;
         width: 100%;
-        transform: translateX(0%);
+        transform: none;
+        /* 设置为100%，占满可用空间 */
     }
 
     .bolgDetail {
+        margin: 0;
         width: 100%;
+        /* 宽度设置为90%，避免过大的空白 */
+    }
+
+    .markdownContent {
+        width: 90%;
     }
 }
