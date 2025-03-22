@@ -31,7 +31,6 @@
 
     /* 添加阴影和边框 */
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    /* 白色边框，突显头像 */
 }
 
 .about-content {
@@ -39,23 +38,18 @@
     font-size: 18px;
     color: #555;
     max-width: 800px;
+    margin-top: 20px;
+    /* 增加内容与头像的间距 */
 }
 
-/* 响应式优化：当屏幕宽度较小时调整头像大小 */
+
 @media screen and (max-width: 768px) {
     .avatar {
-        width: 100px;
-        /* 小屏幕上稍微缩小头像 */
-        height: 100px;
-        /* 小屏幕上稍微缩小头像 */
+        width: 160px;
+        height: 160px;
     }
-}
 
-@media screen and (max-width: 480px) {
-    .avatar {
-        width: 80px;
-        /* 更小屏幕时再缩小 */
-        height: 80px;
-        /* 更小屏幕时再缩小 */
+    .about {
+        padding: 100px 0 40px 0;
     }
 }
