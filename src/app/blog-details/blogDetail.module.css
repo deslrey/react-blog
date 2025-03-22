@@ -1,5 +1,13 @@
+.bolgDetailContainer {
+    display: flex;
+    justify-content: flex-start;
+    width: 80%;
+    transform: translateX(5%); /* 向右偏移 10% */
+    margin: 0 auto;
+}
+
 .bolgDetail {
-    width: 60%;
+    width: 70%;
     padding: 90px 0 22px 0;
     flex: 1;
     display: flex;
@@ -7,13 +15,13 @@
     align-items: center;
     background-color: var(--bg-w-pure);
     position: relative;
-
-    /* 允许用户选择文字 */
+    margin: 0 auto;
     -webkit-user-select: text;
     -moz-user-select: text;
     -ms-user-select: text;
     user-select: text;
 }
+
 
 .frontMatter {
     background-color: #f9f9f9;
@@ -123,4 +131,44 @@
 .copyBtn:hover {
     background: linear-gradient(90deg, #357abd 0%, #2c6da4 100%);
     transform: scale(1.05);
+}
+
+
+/* 目录部分 */
+.directory {
+    width: 20%;
+    /* 设置目录的宽度 */
+    padding: 20px;
+    position: sticky;
+    top: 100px;
+    height: fit-content;
+    background: #f9f9f9;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.directory .content {
+    background: #f9f9f9;
+    padding: 16px;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.directory ul {
+    list-style: none;
+    padding-left: 0;
+}
+
+.directory li {
+    margin-bottom: 8px;
+}
+
+.directory a {
+    color: #3498db;
+    text-decoration: none;
+    font-size: 14px;
+}
+
+.directory a:hover {
+    text-decoration: underline;
 }

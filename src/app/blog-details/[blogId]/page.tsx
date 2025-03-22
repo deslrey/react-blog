@@ -51,7 +51,6 @@ const CodeBlock = ({ language, value }: { language: string; value: string }) => 
         }
     };
 
-
     return (
         <div style={{ marginBottom: '32px', borderRadius: '12px', boxShadow: '0 4px 12px rgba(0,0,0,0.1)' }}>
             <div className={styles.codeHeader}>
@@ -77,11 +76,26 @@ const CodeBlock = ({ language, value }: { language: string; value: string }) => 
     );
 };
 
+// 提取标题生成目录
+const extractHeadings = (markdown: string) => {
+    const headingRegex = /^(#{1,6})\s+(.*)$/gm;
+    const headings = [];
+    let match;
+    while ((match = headingRegex.exec(markdown)) !== null) {
+        headings.push({
+            level: match[1].length,
+            text: match[2],
+            id: match[2].replace(/\s+/g, '-').toLowerCase()
+        });
+    }
+    return headings;
+};
 
 const BlogDetails = ({ params }: { params: Promise<{ blogId: number }> }) => {
     const { blogId } = React.use(params);
     const [frontMatter, setFrontMatter] = useState<FrontMatter | null>(null);
     const [markdownContent, setMarkdownContent] = useState<string>('');
+    const [headings, setHeadings] = useState<any[]>([]);
 
     useEffect(() => {
         const loadMarkdown = async () => {
@@ -93,8 +107,10 @@ const BlogDetails = ({ params }: { params: Promise<{ blogId: number }> }) => {
                 if (match) {
                     setFrontMatter(YAML.parse(match[1]));
                     setMarkdownContent(match[2]);
+                    setHeadings(extractHeadings(match[2]));
                 } else {
                     setMarkdownContent(text);
+                    setHeadings(extractHeadings(text));
                 }
             } catch (error) {
                 console.error('加载失败', error);
@@ -105,51 +121,75 @@ const BlogDetails = ({ params }: { params: Promise<{ blogId: number }> }) => {
     }, [blogId]);
 
     return (
-        <div className={styles.bolgDetail}>
-            {frontMatter && (
-                <div className={styles.frontMatter}>
-                    <h1>{frontMatter.title}</h1>
-                    <p>作者: {frontMatter.author}</p>
-                    <p>简介: {frontMatter.describe}</p>
-                    <p>更新时间: {frontMatter.update}</p>
-                    <p>阅读时间: {frontMatter.readTime}</p>
-                    <p>类型: {frontMatter.type}</p>
+        <div className={styles.bolgDetailContainer}>
+            {/* 主内容区 */}
+            <div className={styles.bolgDetail}>
+                {frontMatter && (
+                    <div className={styles.frontMatter}>
+                        <h1>{frontMatter.title}</h1>
+                        <p>作者: {frontMatter.author}</p>
+                        <p>简介: {frontMatter.describe}</p>
+                        <p>更新时间: {frontMatter.update}</p>
+                        <p>阅读时间: {frontMatter.readTime}</p>
+                        <p>类型: {frontMatter.type}</p>
+                    </div>
+                )}
+
+                <div className={`${styles.markdownContent} markdownContent`}>
+                    <ReactMarkdown
+                        rehypePlugins={[rehypeRaw]}
+                        components={{
+                            code({
+                                inline,
+                                className,
+                                children,
+                                ...props
+                            }: {
+                                inline?: boolean;
+                                className?: string;
+                                children?: React.ReactNode;
+                            }) {
+                                const match = /language-(\w+)/.exec(className || '');
+                                const language = match ? match[1] : 'plaintext';
+                                const codeString = String(children).replace(/\n$/, '');
+
+                                return inline ? (
+                                    <code className={className} {...props}>{children}</code>
+                                ) : (
+                                    <CodeBlock language={language} value={codeString} />
+                                );
+                            },
+                            h1: ({ children }) => <h1 id={String(children).replace(/\s+/g, '-').toLowerCase()}>{children}</h1>,
+                            h2: ({ children }) => <h2 id={String(children).replace(/\s+/g, '-').toLowerCase()}>{children}</h2>,
+                            h3: ({ children }) => <h3 id={String(children).replace(/\s+/g, '-').toLowerCase()}>{children}</h3>,
+                            h4: ({ children }) => <h4 id={String(children).replace(/\s+/g, '-').toLowerCase()}>{children}</h4>,
+                            h5: ({ children }) => <h5 id={String(children).replace(/\s+/g, '-').toLowerCase()}>{children}</h5>,
+                            h6: ({ children }) => <h6 id={String(children).replace(/\s+/g, '-').toLowerCase()}>{children}</h6>,
+                        }}
+                    >
+                        {markdownContent}
+                    </ReactMarkdown>
                 </div>
-            )}
+            </div>
 
-            <div className={styles.markdownContent}>
-                <ReactMarkdown
-                    rehypePlugins={[rehypeRaw]}
-                    components={{
-                        code({
-                            node,
-                            inline,
-                            className,
-                            children,
-                            ...props
-                        }: {
-                            node?: any;
-                            inline?: boolean;
-                            className?: string;
-                            children?: React.ReactNode;
-                        }) {
-                            const match = /language-(\w+)/.exec(className || '');
-                            const language = match ? match[1] : 'plaintext';
-                            const codeString = String(children).replace(/\n$/, '');
-
-                            return inline ? (
-                                <code className={className} {...props}>{children}</code>
-                            ) : (
-                                <CodeBlock language={language} value={codeString} />
-                            );
-                        },
-                    }}
-                >
-                    {markdownContent}
-                </ReactMarkdown>
+            {/* 目录区 */}
+            <div className={styles.directory}>
+                <div>
+                    <h3>目录</h3>
+                    <ul>
+                        {headings.map((heading, index) => (
+                            <li key={index} style={{ marginLeft: (heading.level - 1) * 16, marginBottom: '8px' }}>
+                                <a href={`#${heading.id}`} style={{ color: '#3498db', textDecoration: 'none', fontSize: '14px' }}>
+                                    {heading.text}
+                                </a>
+                            </li>
+                        ))}
+                    </ul>
+                </div>
             </div>
         </div>
     );
+
 };
 
 export default BlogDetails;
