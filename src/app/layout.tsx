@@ -2,6 +2,9 @@ import React from 'react';
 import Navbar from './components/NavBar';
 import { Metadata } from 'next';
 import '../app/styles/globals.css'
+import './styles/markdown.css'
+// import './styles/markdown.scss'
+import './styles/nProgress.css'
 
 export const metadata: Metadata = {
     title: 'deslre',

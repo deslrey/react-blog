@@ -78,7 +78,7 @@ const CodeBlock = ({ language, value }: { language: string; value: string }) => 
 
 // 提取标题生成目录
 const extractHeadings = (markdown: string) => {
-    const headingRegex = /^(#{1,6})\s+(.*)$/gm;
+    const headingRegex = /^(#{1,5})\s+(.*)$/gm;
     const headings = [];
     let match;
     while ((match = headingRegex.exec(markdown)) !== null) {
@@ -135,7 +135,7 @@ const BlogDetails = ({ params }: { params: Promise<{ blogId: number }> }) => {
                     </div>
                 )}
 
-                <div className={`${styles.markdownContent} markdownContent`}>
+                <div className={`${styles.markdownContent} markdownContent markdown`}>
                     <ReactMarkdown
                         rehypePlugins={[rehypeRaw]}
                         components={{
@@ -164,7 +164,7 @@ const BlogDetails = ({ params }: { params: Promise<{ blogId: number }> }) => {
                             h3: ({ children }) => <h3 id={String(children).replace(/\s+/g, '-').toLowerCase()}>{children}</h3>,
                             h4: ({ children }) => <h4 id={String(children).replace(/\s+/g, '-').toLowerCase()}>{children}</h4>,
                             h5: ({ children }) => <h5 id={String(children).replace(/\s+/g, '-').toLowerCase()}>{children}</h5>,
-                            h6: ({ children }) => <h6 id={String(children).replace(/\s+/g, '-').toLowerCase()}>{children}</h6>,
+
                         }}
                     >
                         {markdownContent}

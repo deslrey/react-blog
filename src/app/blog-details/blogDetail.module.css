@@ -2,13 +2,14 @@
     display: flex;
     justify-content: flex-start;
     width: 80%;
-    transform: translateX(5%); /* 向右偏移 10% */
+    transform: translateX(5%);
     margin: 0 auto;
+    flex-wrap: wrap;
 }
 
 .bolgDetail {
     width: 70%;
-    padding: 90px 0 22px 0;
+    padding: 90px 0 2px 0;
     flex: 1;
     display: flex;
     flex-direction: column;
@@ -22,10 +23,9 @@
     user-select: text;
 }
 
-
 .frontMatter {
     background-color: #f9f9f9;
-    padding: 24px 28px;
+    padding: 12px 28px;
     border-radius: 12px;
     margin-bottom: 32px;
     border-left: 6px solid #3498db;
@@ -77,7 +77,6 @@
 
 .markdownContent pre {
     background-color: #2d2f3a;
-    /* 深灰蓝，柔和不刺眼 */
     color: #f8f8f2;
     padding: 10px;
     border-radius: 12px;
@@ -94,18 +93,13 @@
     height: auto;
     display: block;
     margin: 20px auto;
-    /* 可选：让图片居中 */
     border-radius: 8px;
-    /* 可选：图片圆角，整体更柔和 */
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-    /* 可选：加点阴影更美观 */
 }
-
 
 /* 代码块顶部标签优化 */
 .codeHeader {
     background: linear-gradient(90deg, #3a3f51 0%, #4a5165 100%);
-    /* 蓝灰渐变 */
     color: #e0e0e0;
     padding: 10px 16px;
     border-top-left-radius: 12px;
@@ -133,11 +127,9 @@
     transform: scale(1.05);
 }
 
-
 /* 目录部分 */
 .directory {
     width: 20%;
-    /* 设置目录的宽度 */
     padding: 20px;
     position: sticky;
     top: 100px;
@@ -147,28 +139,21 @@
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
 }
 
-.directory .content {
-    background: #f9f9f9;
-    padding: 16px;
-    border-radius: 12px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-}
+/* 媒体查询，屏幕宽度小于1200px时隐藏目录 */
+@media (max-width: 1200px) {
+    .directory {
+        display: none;
+        /* 隐藏目录 */
+    }
 
-.directory ul {
-    list-style: none;
-    padding-left: 0;
-}
+    .bolgDetailContainer {
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+        transform: translateX(0%);
+    }
 
-.directory li {
-    margin-bottom: 8px;
-}
-
-.directory a {
-    color: #3498db;
-    text-decoration: none;
-    font-size: 14px;
-}
-
-.directory a:hover {
-    text-decoration: underline;
+    .bolgDetail {
+        width: 100%;
+    }
 }

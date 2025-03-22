@@ -1,0 +1,292 @@
+/*
+ * NOTE:
+ * - The use of browser-specific styles (-moz-, -webkit-) should be avoided.
+ *   If used, they may not render correctly for people reading the email in
+ *   a different browser than the one from which the email was sent.
+ * - The use of state-dependent styles (like a:hover) don't work because they
+ *   don't match at the time the styles are made explicit. (In email, styles
+ *   must be explicitly applied to all elements -- stylesheets get stripped.)
+ */
+/* This is the overall wrapper, it should be treated as the `body` section. */
+.markdown {
+  /* In edit mode, Wordpress uses a `* { font: ...;} rule+style that makes highlighted
+  code look non-monospace. This rule will override it. */
+  /* Wordpress adds a grey background to `pre` elements that doesn't go well with
+  our syntax highlighting. */
+  /* This spacing has been tweaked to closely match Gmail+Chrome "paragraph" (two line breaks) spacing.
+  Note that we only use a top margin and not a bottom margin -- this prevents the
+  "blank line" look at the top of the email (issue #243).
+  */
+  /* Space paragraphs in a list the same as the list itself. */
+  /* Smaller spacing for sub-lists */
+  /* Use letters for unordered-lists. (Like Github.) */
+  /* Use letters for sub-ordered-lists. (Like Github.) */
+  /* Use Roman numerals for sub-sub-ordered lists. (Like Github.) */
+}
+
+.markdown font {
+  display: block;
+}
+
+.markdown img {
+  max-width: 100%;
+}
+
+.markdown a {
+  color: #3b82f6;
+  text-decoration: underline;
+}
+
+.markdown pre,
+.markdown code {
+  font-size: 0.85em;
+  font-family: Consolas, Inconsolata, Courier, monospace;
+}
+
+.markdown code {
+  /* margin: 0 0.15em; */
+  /* padding: 0 0.3em; */
+  white-space: pre-wrap;
+  /* border: 1px solid #EAEAEA; */
+  background-color: #def5df;
+  border-radius: 3px;
+  display: inline;
+  /* added to fix Yahoo block display of inline code */
+}
+
+.markdown pre {
+  font-size: 1em;
+  line-height: 1.2em;
+  color: #000;
+}
+
+.markdown pre code {
+  white-space: pre;
+  overflow: auto;
+  /* fixes issue #70: Firefox/Thunderbird: Code blocks with horizontal scroll would have bad background colour */
+  border-radius: 3px;
+  /* border: 1px solid #CCC; */
+  /* padding: 0.5em 0.7em; */
+  display: block !important;
+  background-color: #f5f2f0;
+  /* added to counteract the Yahoo-specific `code` rule; without this, code blocks in Blogger are broken */
+}
+
+.markdown .markdown-here-wrapper[data-md-url*="wordpress."] code span {
+  font: inherit;
+}
+
+.markdown .markdown-here-wrapper[data-md-url*="wordpress."] pre {
+  background-color: transparent;
+}
+
+.markdown p {
+  /* !important is needed here because Hotmail/Outlook.com uses !important to
+       kill the margin in <p>. We need this to win. */
+  margin: 0 0 1.2em 0 !important;
+}
+
+.markdown table,
+.markdown pre,
+.markdown dl,
+.markdown q,
+.markdown ul,
+.markdown ol {
+  margin: 1.2em 0;
+}
+
+.markdown ul,
+.markdown ol {
+  padding-left: 2em;
+}
+
+.markdown li {
+  margin: 0.5em 0;
+  font-size: 1rem;
+}
+
+.markdown li p {
+  /* Needs !important to override rule above. */
+  margin: 0.5em 0 !important;
+}
+
+.markdown ul ul,
+.markdown ul ol,
+.markdown ol ul,
+.markdown ol ol {
+  margin: 0;
+  padding-left: 1em;
+}
+
+.markdown ul ul,
+.markdown ul,
+.markdown ul {
+  list-style-type: square;
+  font-size: 1rem;
+}
+
+.markdown ol ol,
+.markdown ul ol {
+  list-style-type: lower-roman;
+}
+
+.markdown ul ul ol,
+.markdown ul ol ol,
+.markdown ol ul ol,
+.markdown ol ol ol {
+  list-style-type: lower-alpha;
+}
+
+.markdown dl {
+  padding: 0;
+}
+
+.markdown dl dt {
+  font-size: 1em;
+  font-weight: bold;
+  font-style: italic;
+}
+
+.markdown dl dd {
+  margin: 0 0 1em;
+  padding: 0 1em;
+}
+
+.markdown blockquote,
+.markdown q {
+  border-left: 4px solid #49b1f5;
+  padding: 1em;
+  color: #a1a1a1;
+  quotes: none;
+  background-color: #ecf7fe;
+  margin-bottom: 1.2rem;
+}
+
+.markdown blockquote p,
+.markdown q p {
+  margin: 0 !important;
+}
+
+.markdown blockquote::before,
+.markdown blockquote::after,
+.markdown q::before,
+.markdown q::after {
+  content: none;
+}
+
+.markdown h1,
+.markdown h2,
+.markdown h3,
+.markdown h4,
+.markdown h5,
+.markdown h6 {
+  margin: 20px 0 10px;
+  padding: 0;
+  font-weight: bold;
+  color: #009688;
+}
+
+.markdown h1 a,
+.markdown h2 a,
+.markdown h3 a,
+.markdown h4 a {
+  cursor: pointer;
+  color: #009688;
+  text-decoration: none;
+}
+
+.markdown h1 a:hover,
+.markdown h2 a:hover,
+.markdown h3 a:hover,
+.markdown h4 a:hover {
+  color: #3b82f6;
+}
+
+.markdown h1 a:hover::after,
+.markdown h2 a:hover::after,
+.markdown h3 a:hover::after,
+.markdown h4 a:hover::after {
+  content: ' #';
+  color: #3b82f6;
+}
+
+.markdown h1 {
+  font-size: 1.5rem;
+  border-bottom: 1px solid #ddd;
+}
+
+.markdown h2 {
+  font-size: 1.375rem;
+  border-bottom: 1px solid #eee;
+}
+
+.markdown h3 {
+  font-size: 1.25rem;
+}
+
+.markdown h4 {
+  font-size: 1.125rem;
+}
+
+.markdown h5 {
+  font-size: 1rem;
+}
+
+.markdown h6 {
+  font-size: 1rem;
+  color: #777;
+}
+
+.markdown table {
+  padding: 0;
+  border-collapse: collapse;
+  border-spacing: 0;
+  font-size: 1em;
+  font: inherit;
+  border: 0;
+  width: 100%;
+  color: #000;
+}
+
+.markdown tbody {
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+.markdown table tr {
+  border: 0;
+  border-top: 1px solid #CCC;
+  background-color: white;
+  margin: 0;
+  padding: 0;
+}
+
+.markdown table tr:nth-child(2n) {
+  background-color: #F8F8F8;
+}
+
+.markdown table tr th,
+.markdown table tr td {
+  font-size: 1em;
+  border: 1px solid #CCC;
+  margin: 0;
+  padding: 0.5em 1em;
+}
+
+.markdown table tr th {
+  font-weight: bold;
+  background-color: #F0F0F0;
+}
+
+.markdown p {
+  font-size: 1rem;
+  line-height: 1.75em;
+  padding-right: 0.5em;
+  padding-left: 0.5em;
+}
+
+.markdown strong,
+.markdown b {
+  color: #BF360C;
+}
