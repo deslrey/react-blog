@@ -1,5 +1,7 @@
 import React from 'react';
 import Navbar from './components/NavBar';
+import { AntdRegistry } from '@ant-design/nextjs-registry';
+import '@ant-design/v5-patch-for-react-19'
 import { Metadata } from 'next';
 import '../app/styles/globals.css'
 import './styles/markdown.css'
@@ -16,8 +18,10 @@ export default function Layout({ children }: { children: React.ReactNode }) {
         <html lang="en">
             <head />
             <body >
-                <Navbar />
-                {children}
+                <AntdRegistry>
+                    <Navbar />
+                    {children}
+                </AntdRegistry>
             </body>
         </html>
     );
