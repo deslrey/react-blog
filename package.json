@@ -3,7 +3,8 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev --turbopack",
+    "demo": "next dev --turbopack",
+    "dev": "next dev",
     "build": "next build",
     "start": "next start",
     "lint": "next lint"
@@ -11,6 +12,7 @@
   "dependencies": {
     "@ant-design/icons": "^6.0.0",
     "@ant-design/nextjs-registry": "^1.0.2",
+    "@ant-design/v5-patch-for-react-19": "^1.0.3",
     "@mdx-js/loader": "^3.1.0",
     "@next/mdx": "^15.1.7",
     "@types/mdx": "^2.0.0",
