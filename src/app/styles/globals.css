@@ -224,6 +224,24 @@ body {
     opacity: 0;
 }
 
+/* 默认 notification 的进度条样式 */
+.custom-notification-success .ant-notification-notice-progress {
+    background-color: #52c41a !important;
+}
+
+.custom-notification-info .ant-notification-notice-progress {
+    background-color: #1890ff !important;
+}
+
+.custom-notification-warning .ant-notification-notice-progress {
+    background-color: #faad14 !important;
+}
+
+.custom-notification-error .ant-notification-notice-progress {
+    background-color: #ff4d4f !important;
+}
+
+
 @media screen and (max-width: 900px) {
     * {
         letter-spacing: 0;
