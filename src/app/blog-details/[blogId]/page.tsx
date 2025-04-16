@@ -1,12 +1,15 @@
 'use client';
 
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import ReactMarkdown from 'react-markdown';
 import rehypeRaw from 'rehype-raw';
 import { PrismLight as SyntaxHighlighter } from 'react-syntax-highlighter';
 import { oneDark } from 'react-syntax-highlighter/dist/esm/styles/prism';
 import YAML from 'yaml';
 import styles from '../blogDetail.module.css';
+import request from '@/app/utils/Request';
+import { Article } from '@/app/interfaces/bolgDetails';
+import Notification from '@/app/utils/Notification';
 
 interface FrontMatter {
     title: string;
@@ -96,13 +99,21 @@ const BlogDetails = ({ params }: { params: Promise<{ blogId: number }> }) => {
     const [markdownContent, setMarkdownContent] = useState<string>('');
     const [headings, setHeadings] = useState<any[]>([]);
 
+    const sign = useRef<boolean>(false);
+
     useEffect(() => {
+
+        if (sign.current) return;
+        sign.current = true;
         const loadMarkdown = async () => {
             try {
-                const res = await fetch(`/content/${blogId}.md`);
-                if (!res.ok) return console.error('Markdown 加载失败');
-                const text = await res.text();
-
+                // const res = await fetch(`/content/${blogId}.md`);
+                const result = await request.post<Article>(`/article/getArticleDetail`, { articleId: 1 }, {}, 'form');
+                if (result.code !== 200) {
+                    Notification.error("文章详情", result.message);
+                    return;
+                }
+                const text = result.data.content
                 const match = text.match(/^---\r?\n([\s\S]+?)\r?\n---\r?\n([\s\S]*)$/);
                 if (match) {
                     setFrontMatter(YAML.parse(match[1]));
