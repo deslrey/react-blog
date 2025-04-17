@@ -4,10 +4,11 @@ import React, { useEffect, useRef, useState } from 'react'
 import Link from 'next/link';
 import Image, { StaticImageData } from 'next/image'
 import ArticleImage from '../../../public/images/0.webp'
-
 import styles from './article.module.css'
 import request from '../utils/Request';
 import { Article as ArticleObj } from '../interfaces/bolgDetails';
+import SysIcon from '../components/SysIcon';
+import dayjs from 'dayjs';
 
 
 const ArticleItem = ({ article }: { article: ArticleObj }) => {
@@ -23,6 +24,14 @@ const ArticleItem = ({ article }: { article: ArticleObj }) => {
                 <div className={styles.articleContent}>
                     <h1>{article.title}</h1>
                     <p>{article.description}</p>
+                    <div className={styles.dateWrapper}>
+                        <SysIcon
+                            style={{ fontSize: '16px', color: '#888', marginRight: '6px' }}
+                            type="icon-rili"
+                        />
+                        <span>{dayjs(article.createTime).format('YYYY-MM-DD HH:mm')}</span>
+                    </div>
+
                 </div>
             </div>
         </Link>
@@ -34,27 +43,19 @@ function Article() {
 
     const sign = useRef<boolean>(false); // 用于标记是否已经加载过数据
 
-    // 使用 useEffect 加载 JSON 数据
     useEffect(() => {
 
         if (sign.current) return; // 如果已经加载过数据，则不再加载
         sign.current = true; // 设置标记为 true，表示数据已加载
 
         const loadArticles = async () => {
-
             const result = await request.get<ArticleObj[]>("/article/getArticleList")
-
             if (result.code !== 200) {
                 console.error("获取文章列表失败", result.message);
                 return;
-
             }
-
-            // console.log('result ======> ', result);
-
             const data = result.data;
-
-            setArticles(data); // 设置为文章数组
+            setArticles(data); 
         };
 
         loadArticles();

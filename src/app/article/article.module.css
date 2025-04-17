@@ -23,6 +23,13 @@
     transition: transform 0.3s;
 }
 
+.dateWrapper {
+    display: flex;
+    align-items: center;
+    margin-top: 8px;
+    font-size: 0.9rem;
+    color: #888;
+}
 
 .articleItem:hover {
     transform: translateY(-5px);
