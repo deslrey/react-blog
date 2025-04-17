@@ -6,20 +6,12 @@ import rehypeRaw from 'rehype-raw';
 import { PrismLight as SyntaxHighlighter } from 'react-syntax-highlighter';
 import { oneDark } from 'react-syntax-highlighter/dist/esm/styles/prism';
 import YAML from 'yaml';
+import dayjs from 'dayjs';
 import styles from '../blogDetail.module.css';
 import request from '@/app/utils/Request';
 import { Article } from '@/app/interfaces/bolgDetails';
 import Notification from '@/app/utils/Notification';
 
-interface FrontMatter {
-    title: string;
-    author: string;
-    describe: string;
-    update: string;
-    readTime: string;
-    type: string;
-    fileName: number;
-}
 
 const CodeBlock = ({ language, value }: { language: string; value: string }) => {
     const [copyText, setCopyText] = useState('复制');
@@ -95,7 +87,7 @@ const extractHeadings = (markdown: string) => {
 
 const BlogDetails = ({ params }: { params: Promise<{ blogId: number }> }) => {
     const { blogId } = React.use(params);
-    const [frontMatter, setFrontMatter] = useState<FrontMatter | null>(null);
+    const [frontMatter, setFrontMatter] = useState<Article | null>(null);
     const [markdownContent, setMarkdownContent] = useState<string>('');
     const [headings, setHeadings] = useState<any[]>([]);
 
@@ -141,10 +133,10 @@ const BlogDetails = ({ params }: { params: Promise<{ blogId: number }> }) => {
                     <div className={styles.frontMatter}>
                         <h1>{frontMatter.title}</h1>
                         <p>作者: {frontMatter.author}</p>
-                        <p>简介: {frontMatter.describe}</p>
-                        <p>更新时间: {frontMatter.update}</p>
+                        <p>简介: {frontMatter.description}</p>
+                        <p>更新时间: {dayjs(frontMatter.updateTime).format('YYYY-MM-DD HH:mm')}</p>
+                        <p>字数: {frontMatter.wordCount}</p>
                         <p>阅读时间: {frontMatter.readTime}</p>
-                        <p>类型: {frontMatter.type}</p>
                     </div>
                 )}
 

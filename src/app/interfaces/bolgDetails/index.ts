@@ -11,6 +11,7 @@ interface articleDetail {
 
 interface Article {
     id: number;
+    author: string;
     title: string;
     imagePath: string;
     description: string;
@@ -19,6 +20,8 @@ interface Article {
     category: string;
     createTime: Date;
     updateTime: Date;
+    wordCount: number;
+    readTime: number;
     content: string;
     exist: boolean;
 }
