@@ -90,6 +90,7 @@ const BlogDetails = ({ params }: { params: Promise<{ blogId: number }> }) => {
     const [frontMatter, setFrontMatter] = useState<Article | null>(null);
     const [markdownContent, setMarkdownContent] = useState<string>('');
     const [headings, setHeadings] = useState<any[]>([]);
+    const [wordCount, setWordCount] = useState<number>(0);
 
     const sign = useRef<boolean>(false);
 
@@ -106,6 +107,8 @@ const BlogDetails = ({ params }: { params: Promise<{ blogId: number }> }) => {
                     return;
                 }
                 const text = result.data.content
+                setWordCount(text.length);
+
                 const match = text.match(/^---\r?\n([\s\S]+?)\r?\n---\r?\n([\s\S]*)$/);
                 if (match) {
                     setFrontMatter(YAML.parse(match[1]));
@@ -135,7 +138,7 @@ const BlogDetails = ({ params }: { params: Promise<{ blogId: number }> }) => {
                         <p>作者: {frontMatter.author}</p>
                         <p>简介: {frontMatter.description}</p>
                         <p>更新时间: {dayjs(frontMatter.updateTime).format('YYYY-MM-DD HH:mm')}</p>
-                        <p>字数: {frontMatter.wordCount}</p>
+                        <p>字数: {wordCount}</p>
                         <p>阅读时间: {frontMatter.readTime}</p>
                     </div>
                 )}
