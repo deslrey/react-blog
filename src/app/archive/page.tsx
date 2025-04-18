@@ -1,17 +1,11 @@
 'use client';
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import Link from 'next/link';
 import styles from './archive.module.css';
-
-interface Article {
-    title: string;
-    author: string;
-    describe: string;
-    update: string;
-    readTime: string;
-    type: string;
-    fileName: number;
-}
+import request from '../utils/Request';
+import { Article } from '../interfaces/bolgDetails';
+import Notification from '../utils/Notification';
+import dayjs from 'dayjs';
 
 const ArchiveItem = ({ year, articles }: { year: string; articles: Article[] }) => {
     return (
@@ -19,13 +13,16 @@ const ArchiveItem = ({ year, articles }: { year: string; articles: Article[] }) 
             <h2>{year}</h2>
             <div className={styles.articleList}>
                 {articles.map((item, index) => {
-                    const [, month, day] = item.update.split('-');
+                    const date = dayjs(item.createTime);
+                    const month = date.format('MM');
+                    const day = date.format('DD');
+
                     return (
                         <div className={styles.articleItem} key={index}>
                             <div className={styles.dateBox}>
                                 {month}-{day}
                             </div>
-                            <Link href={`/blog-details/${item.fileName}`} className={styles.title}>
+                            <Link href={`/blog-details/${item.id}`} className={styles.title}>
                                 {item.title}
                             </Link>
                         </div>
@@ -39,25 +36,34 @@ const ArchiveItem = ({ year, articles }: { year: string; articles: Article[] }) 
 const Archive = () => {
     const [groupedData, setGroupedData] = useState<Record<string, Article[]>>({});
     const [totalCount, setTotalCount] = useState(0);
+    const sign = useRef<boolean>(false);
 
     useEffect(() => {
-        const fetchData = async () => {
-            const res = await fetch('/api/list.json');
-            const jsonData: Article[] = await res.json();
+        if (sign.current) return;
+        sign.current = true;
 
+        const fetchData = async () => {
+            const res = await request.get("/article/getArchives");
+            if (res.code !== 200) {
+                Notification.error("查看存档失败", res.message);
+                return;
+            }
+
+            const jsonData: Article[] = res.data;
             const grouped: Record<string, Article[]> = {};
+
             jsonData.forEach((item) => {
-                const year = item.update.split('-')[0];
+                const year = dayjs(item.createTime).format('YYYY');
                 if (!grouped[year]) grouped[year] = [];
                 grouped[year].push(item);
             });
 
             for (const year in grouped) {
-                grouped[year].sort((a, b) => new Date(b.update).getTime() - new Date(a.update).getTime());
+                grouped[year].sort((a, b) => dayjs(b.createTime).valueOf() - dayjs(a.createTime).valueOf());
             }
 
             setGroupedData(grouped);
-            setTotalCount(jsonData.length); // 统计总数
+            setTotalCount(jsonData.length);
         };
 
         fetchData();
