@@ -91,6 +91,7 @@ const BlogDetails = ({ params }: { params: Promise<{ blogId: number }> }) => {
     const [markdownContent, setMarkdownContent] = useState<string>('');
     const [headings, setHeadings] = useState<any[]>([]);
     const [wordCount, setWordCount] = useState<number>(0);
+    const [readTime, setReadTime] = useState<number>(1);
 
     const sign = useRef<boolean>(false);
 
@@ -101,13 +102,14 @@ const BlogDetails = ({ params }: { params: Promise<{ blogId: number }> }) => {
         const loadMarkdown = async () => {
             try {
                 // const res = await fetch(`/content/${blogId}.md`);
-                const result = await request.post<Article>(`/article/getArticleDetail`, { articleId: 1 }, {}, 'form');
+                const result = await request.post<Article>(`/article/getArticleDetail`, { articleId: blogId }, {}, 'form');
                 if (result.code !== 200) {
                     Notification.error("文章详情", result.message);
                     return;
                 }
                 const text = result.data.content
                 setWordCount(text.length);
+                setReadTime(Math.ceil(text.length / 400));
 
                 const match = text.match(/^---\r?\n([\s\S]+?)\r?\n---\r?\n([\s\S]*)$/);
                 if (match) {
@@ -139,7 +141,7 @@ const BlogDetails = ({ params }: { params: Promise<{ blogId: number }> }) => {
                         <p>简介: {frontMatter.description}</p>
                         <p>更新时间: {dayjs(frontMatter.updateTime).format('YYYY-MM-DD HH:mm')}</p>
                         <p>字数: {wordCount}</p>
-                        <p>阅读时间: {frontMatter.readTime}</p>
+                        <p>阅读时间: {readTime}min</p>
                     </div>
                 )}
 
