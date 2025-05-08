@@ -1,7 +1,7 @@
 interface articleDetail {
     title: string;
     author: string;
-    descride: string;
+    description: string;
     updateDate: Date;
     wordCount: number;
     readTime: number;
