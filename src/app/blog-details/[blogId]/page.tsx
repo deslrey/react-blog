@@ -87,11 +87,9 @@ const extractHeadings = (markdown: string) => {
 
 const BlogDetails = ({ params }: { params: Promise<{ blogId: number }> }) => {
     const { blogId } = React.use(params);
-    const [frontMatter, setFrontMatter] = useState<Article | null>(null);
+    const [article, setArticle] = useState<Article | null>(null);
     const [markdownContent, setMarkdownContent] = useState<string>('');
     const [headings, setHeadings] = useState<any[]>([]);
-    const [wordCount, setWordCount] = useState<number>(0);
-    const [readTime, setReadTime] = useState<number>(1);
 
     const sign = useRef<boolean>(false);
 
@@ -101,19 +99,16 @@ const BlogDetails = ({ params }: { params: Promise<{ blogId: number }> }) => {
         sign.current = true;
         const loadMarkdown = async () => {
             try {
-                // const res = await fetch(`/content/${blogId}.md`);
                 const result = await request.post<Article>(`/article/getArticleDetail`, { articleId: blogId }, {}, 'form');
                 if (result.code !== 200) {
                     Notification.error("文章详情", result.message);
                     return;
                 }
-                const text = result.data.content
-                setWordCount(text.length);
-                setReadTime(Math.ceil(text.length / 400));
-
+                const data = result.data
+                const text = data.content
+                setArticle(data)
                 const match = text.match(/^---\r?\n([\s\S]+?)\r?\n---\r?\n([\s\S]*)$/);
                 if (match) {
-                    setFrontMatter(YAML.parse(match[1]));
                     setMarkdownContent(match[2]);
                     setHeadings(extractHeadings(match[2]));
                 } else {
@@ -126,7 +121,6 @@ const BlogDetails = ({ params }: { params: Promise<{ blogId: number }> }) => {
                 console.error('加载失败', error);
             }
         };
-
         loadMarkdown();
     }, [blogId]);
 
@@ -134,14 +128,14 @@ const BlogDetails = ({ params }: { params: Promise<{ blogId: number }> }) => {
         <div className={styles.bolgDetailContainer}>
             {/* 主内容区 */}
             <div className={styles.bolgDetail}>
-                {frontMatter && (
+                {article && (
                     <div className={styles.frontMatter}>
-                        <h1>{frontMatter.title}</h1>
-                        <p>作者: {frontMatter.author}</p>
-                        <p>简介: {frontMatter.description}</p>
-                        <p>更新时间: {dayjs(frontMatter.updateTime).format('YYYY-MM-DD HH:mm')}</p>
-                        <p>字数: {wordCount}</p>
-                        <p>阅读时间: {readTime}min</p>
+                        <h1>{article.title}</h1>
+                        <p>作者: {article.author}</p>
+                        <p>简介: {article.description}</p>
+                        <p>更新时间: {dayjs(article.updateTime).format('YYYY-MM-DD HH:mm')}</p>
+                        <p>字数: {article.wordCount}</p>
+                        <p>阅读时间: {article.readTime}min</p>
                     </div>
                 )}
 
