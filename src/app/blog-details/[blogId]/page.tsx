@@ -3,7 +3,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import ReactMarkdown from 'react-markdown';
 import rehypeRaw from 'rehype-raw';
-import { PrismLight as SyntaxHighlighter } from 'react-syntax-highlighter';
+import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
 import { oneDark } from 'react-syntax-highlighter/dist/esm/styles/prism';
 import YAML from 'yaml';
 import dayjs from 'dayjs';
@@ -121,8 +121,10 @@ const BlogDetails = ({ params }: { params: Promise<{ blogId: number }> }) => {
                 console.error('加载失败', error);
             }
         };
+
         loadMarkdown();
     }, [blogId]);
+
 
     return (
         <div className={styles.bolgDetailContainer}>
