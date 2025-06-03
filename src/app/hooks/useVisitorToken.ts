@@ -2,7 +2,7 @@ import { useEffect } from 'react'
 import request from '../utils/Request'
 
 const VISITOR_TOKEN_KEY = 'visitorToken'
-const VISITOR_ID = 'visitorToken'
+const VISITOR_ID = 'visitorId'
 
 const api = {
     visitorToken: '/visitor/visitorToken',
