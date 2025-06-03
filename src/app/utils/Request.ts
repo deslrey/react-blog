@@ -17,8 +17,18 @@ const service: AxiosInstance = axios.create({
 service.interceptors.request.use(
     (config: InternalAxiosRequestConfig) => {  // 强制转换为 InternalAxiosRequestConfig
         const token = localStorage.getItem('token');
+        const visitorToken = localStorage.getItem('visitorToken')
+        const visitorId = localStorage.getItem('visitorId')
+
         if (token && config.headers) {
             config.headers.Authorization = `Bearer ${token}`; // 添加 token 到请求头
+        }
+
+        if (visitorToken && config.headers) {
+            config.headers['X-Visitor-Token'] = visitorToken // 自定义请求头字段
+        }
+        if (visitorId && config.headers) {
+            config.headers['X-Visitor-Id'] = visitorId
         }
         return config;
     },
