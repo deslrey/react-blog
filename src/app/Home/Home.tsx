@@ -8,6 +8,7 @@ import Typed from "typed.js"
 import Image from 'next/image'
 import SysIcon from '../components/SysIcon'
 import { scrollTo } from '../utils/elements'
+import { useVisitorToken } from '../hooks/useVisitorToken'
 
 const Home = () => {
 
@@ -20,8 +21,9 @@ const Home = () => {
             getContainer: () => document.body || window,
         });
     };
-
+    useVisitorToken()
     useEffect(() => {
+
         const typed = new Typed(typeTarget.current, {
             strings: [
                 "个人Blog",
@@ -35,7 +37,6 @@ const Home = () => {
             backDelay: 2000,
             showCursor: false,
         });
-
         return () => {
             typed.destroy();
         };
