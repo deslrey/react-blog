@@ -22,6 +22,7 @@ interface Article {
     updateTime: Date;
     wordCount: number;
     readTime: number;
+    pageViews: number;
     content: string;
     exist: boolean;
 }

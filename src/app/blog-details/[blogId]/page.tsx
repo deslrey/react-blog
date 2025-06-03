@@ -138,6 +138,7 @@ const BlogDetails = ({ params }: { params: Promise<{ blogId: number }> }) => {
                         <p>更新时间: {dayjs(article.updateTime).format('YYYY-MM-DD HH:mm')}</p>
                         <p>字数: {article.wordCount}</p>
                         <p>阅读时间: {article.readTime}min</p>
+                        <p>访问量: {article.pageViews}</p>
                     </div>
                 )}
 
