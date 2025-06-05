@@ -5,8 +5,10 @@ export default function useDocumentTitle(title: string, description?: string) {
     useEffect(() => {
         if (title) {
             document.title = title
+        } else {
+            document.title = '博客'
         }
-
+        
         if (description) {
             const metaDesc = document.querySelector("meta[name='description']")
             if (metaDesc) {
