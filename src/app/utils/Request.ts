@@ -1,3 +1,4 @@
+import { message } from 'antd';
 import axios, { AxiosInstance, AxiosRequestConfig, AxiosResponse, InternalAxiosRequestConfig } from 'axios';
 import qs from 'qs';
 
@@ -7,54 +8,66 @@ interface Results<T> {
     data: T;
 }
 
-// 创建 axios 实例
+const isServer = typeof window === 'undefined';
+
 const service: AxiosInstance = axios.create({
-    baseURL: '/deslre', // 这里是接口的基础路径
-    timeout: 5000, // 设置超时
+    baseURL: isServer ? process.env.NEXT_PUBLIC_API_BASE_URL : '/deslre',
+    timeout: 5000,
 });
+
+// service.interceptors.request.use(
+//   (config) => {
+//     console.log('[请求拦截器] 请求路径:', config.baseURL + config.url);
+//     return config;
+//   },
+//   (error) => Promise.reject(error)
+// );
+
 
 // 请求拦截器
 service.interceptors.request.use(
-    (config: InternalAxiosRequestConfig) => {  // 强制转换为 InternalAxiosRequestConfig
-        const token = localStorage.getItem('token');
-        const visitorToken = localStorage.getItem('visitorToken')
-        const visitorId = localStorage.getItem('visitorId')
+    (config: InternalAxiosRequestConfig) => {
+        if (typeof window !== 'undefined') {
+            const token = localStorage.getItem('token');
+            const visitorToken = localStorage.getItem('visitorToken');
+            const visitorId = localStorage.getItem('visitorId');
 
-        if (token && config.headers) {
-            config.headers.Authorization = `Bearer ${token}`; // 添加 token 到请求头
+            if (token && config.headers) {
+                config.headers.Authorization = `Bearer ${token}`;
+            }
+            if (visitorToken && config.headers) {
+                config.headers['X-Visitor-Token'] = visitorToken;
+            }
+            if (visitorId && config.headers) {
+                config.headers['X-Visitor-Id'] = visitorId;
+            }
         }
 
-        if (visitorToken && config.headers) {
-            config.headers['X-Visitor-Token'] = visitorToken // 自定义请求头字段
-        }
-        if (visitorId && config.headers) {
-            config.headers['X-Visitor-Id'] = visitorId
-        }
         return config;
     },
-    (error) => {
-        return Promise.reject(error);
-    }
+    (error) => Promise.reject(error)
 );
 
 // 响应拦截器
 service.interceptors.response.use(
     (response: AxiosResponse) => {
-        // console.log(response); // 打印响应数据
-
         const res = response.data;
         if (res.code !== 200) {
-            // 错误提示可以扩展
-            console.error(res.message || '请求错误');
+            if (typeof window !== 'undefined') {
+                message.error(res.message || '请求错误');
+            }
             return Promise.reject(res);
         }
         return res;
     },
     (error) => {
-        console.error(error.message || '请求失败');
+        if (typeof window !== 'undefined') {
+            message.error(error.message || '请求失败');
+        }
         return Promise.reject(error);
     }
 );
+
 
 // 通用的 POST 方法（支持 json 和 form-urlencoded）
 const post = <T = any>(
