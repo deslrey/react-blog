@@ -19,6 +19,8 @@ const ArticleItem = ({ article }: { article: ArticleObj }) => {
                     src={ArticleImage}
                     alt={article.title}
                     className={styles.articleImage}
+                    priority={true}
+
                 />
 
                 <div className={styles.articleContent}>
@@ -55,7 +57,7 @@ function Article() {
                 return;
             }
             const data = result.data;
-            setArticles(data); 
+            setArticles(data);
         };
 
         loadArticles();
